@@ -5,6 +5,7 @@ class App extends Component{
       <div>
         <h1>My React App React Ftws1</h1>
       </div>
+      
     )
     
   }
