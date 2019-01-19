@@ -3,7 +3,7 @@ class App extends Component{
   render(){
     return(
       <div>
-        <h1>My React App React Ftw</h1>
+        <h1>My React App React Ftws</h1>
       </div>
     )
     
