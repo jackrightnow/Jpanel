@@ -3,12 +3,13 @@ import Home from './home/Home';
 
 import { UserContext, defaultUser } from '../context/user-context';
 
+
 class App extends Component{
   render(){
     return(
       <div>
         <UserContext.Provider value={defaultUser}>
-          <h1>My React App Works1</h1>
+          <h1>Ugur Soft Testing</h1>
           <Home />
         </UserContext.Provider>
       </div>
