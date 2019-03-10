@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const defaultUser = {
-  ad: "cemil baba",
-  email:"cemil@ga.com"
-}
-
-export const UserContext = React.createContext(defaultUser);
+export default React.createContext({
+  userTokenId: 0,
+  userData: {userName:"ugur baba"},
+  setUserData: data => {},
+  setUserTokenId: tokenId => {}
+});
 
 
