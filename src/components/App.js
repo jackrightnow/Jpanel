@@ -1,54 +1,29 @@
 import React, {Component, useContext, useEffect, useState} from 'react';
 import {BrowserRouter, Route, Switch, Link, Redirect} from 'react-router-dom';
 
-//import GlobalState from '../context/GlobalState';
-//import UserContext from '../context/user-context';
-
 import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
+import AppContext from '../context/AppContext'
 
-import UserContext from '../context/user-context'
-
-
-
-
-const Nav = props => {
-  return (
-    <ul>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/login">Login</Link></li>
-    </ul>
-  )
-}
 
 const App = props => {
 
-  //const uc = useContext(UserContext);
   let initUserData = {userName: "ugur cemil"};
   if(localStorage.getItem('userData')){
     initUserData = JSON.parse(localStorage.getItem('userData'));
   }
-
   const [userTokenId, setUserTokenId] = useState(localStorage.getItem('userTokenId') || 0);
   const [userData, setUserData] = useState(initUserData);
-  
-  const globalSettings = {
+  const startingValues = {
+    base_url: 'http://localhost:8080/',
+    api_url: 'http://localhost:8100/KpApi/',
     userTokenId: userTokenId,
     userData: userData,
-    base_url: 'http://localhost:8080/',
-    api_url: 'http://192.168.33.10/JPanelRest/KpApi/',
-    setUserData: setUserData,
     setUserTokenId: setUserTokenId,
+    setUserData: setUserData,
   }
-
-  useEffect(()=>{
-    //console.log("App ok")
-    //console.log(userTokenId)
-  });
-
   return(
-    <UserContext.Provider
-      value={globalSettings}>
+    <AppContext.Provider value={ startingValues } >
       <BrowserRouter>
         <React.Fragment>
           <Switch>         
@@ -60,7 +35,7 @@ const App = props => {
           </Switch>
         </React.Fragment>
       </BrowserRouter>
-    </UserContext.Provider>
+    </AppContext.Provider>
   )
 }
 

@@ -142,14 +142,12 @@ label{
   //min-height: 100%;
   height: 100vh;
   .main{
-    //display: flex;
+    display: flex;
+    height: 100%;
     .sidebar{
       background-color: #1b1e2b;
-      width: 270px;
-      position: fixed;
-      left: 0;
-      top: 0;
-      bottom: 0;
+      flex:0 0 270px;
+      max-width: 270px;
       display: flex;
       flex-direction: column;
       .logo-cont{

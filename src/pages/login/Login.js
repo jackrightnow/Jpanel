@@ -1,20 +1,11 @@
 import React, {useState, useContext, useEffect} from 'react';
-import UserContext from '../../context/user-context';
+import AppContext from '../../context/AppContext';
 
 import './Login.scss'
 import Swal from 'sweetalert2';
 
 const Login = props => {
-  const uc = useContext(UserContext);
-  //var bootstrap_enabled = (typeof $().modal == 'function');
-  //console.log(bootstrap_enabled);
-  //const [userName, setUserName] = useState("");
-  //const [password, setPassword] = useState(""); 
-
-  useEffect(()=>{
-    //console.log("login updated");
-    //console.log(uc);
-  })
+  const appContext = useContext(AppContext);
 
   const [values, setValues] = useState({userName:"", password:""});
   const onChange = (e) => {
@@ -23,25 +14,25 @@ const Login = props => {
   const formSubmit = e => {
     e.preventDefault();
     console.log("form gönderildi");
-    //console.log(uc.api_url)    
+    //console.log(appContext.api_url)    
     $.ajax({
       type:'POST',
-      url: uc.api_url + 'formLogin',
+      url: appContext.api_url + 'formLogin',
       data: {formData: values},
       //dataType: 'json'
     }).done(function(res){
-      //console.log(res);
+      console.log(res);
       try {
         let gelen = JSON.parse(res);
-        console.log(gelen);
-        if(gelen.code == 1){
+        //console.log(gelen);
+        if(gelen.code == 1){  // sifre hatali
           Swal.fire({
             type: 'error',
             title: 'Hata',
             text: gelen.sonuc,
           })
         }
-        if(gelen.code == 2){
+        if(gelen.code == 2){  //basarili
           Swal.fire({
             type: 'success',
             title: 'Giriş Başarılı',
@@ -51,8 +42,8 @@ const Login = props => {
             timer:1500
           })
 
-          uc.setUserTokenId(gelen.userTokenId);
-          uc.setUserData(gelen.userData);
+          appContext.setUserTokenId(gelen.userTokenId);
+          appContext.setUserData(gelen.userData);
           localStorage.setItem('userTokenId', gelen.userTokenId);
           localStorage.setItem('userData', JSON.stringify(gelen.userData));
           
@@ -72,17 +63,12 @@ const Login = props => {
       }
     })
   }
-  const logContext = props => {
-    console.log(uc);
-    
-  }
-
 
   return (      
     <div className="login-cont">
       <div className="form">
         <div className="logo">
-          <img src={uc.base_url + '/public/assets/img/logo.png'} alt="" />
+          <img src={appContext.base_url + '/public/assets/img/logo.png'} alt="" />
         </div>
         <div className="head">
           <h4>Hoşgeldiniz.</h4>
@@ -115,7 +101,6 @@ const Login = props => {
           </form>
         </div>      
       </div>
-      <button onClick={logContext}>Context Log</button>
     </div>
   )
 }
