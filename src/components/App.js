@@ -11,7 +11,7 @@ const App = props => {
   let initUserData = {userName: "ugur cemil"};
   if(localStorage.getItem('userData')){
     initUserData = JSON.parse(localStorage.getItem('userData'));
-  }
+  } 
   const [userTokenId, setUserTokenId] = useState(localStorage.getItem('userTokenId') || 0);
   const [userData, setUserData] = useState(initUserData);
   const startingValues = {
